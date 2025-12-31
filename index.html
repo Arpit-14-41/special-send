@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year Mani ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+  background: radial-gradient(circle at top,#ff0080,#7928ca,#2afadf);
+  overflow:hidden;
+  height:100vh;
+  color:white;
+}
+
+/* ENTRY SCREEN */
+#entry{
+  position:fixed;inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  z-index:999;
+  animation:burst 2s forwards;
+}
+@keyframes burst{
+  0%{transform:scale(0);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+.big-text{
+  font-size:3rem;
+  text-align:center;
+  animation:glow 1.5s infinite alternate;
+}
+@keyframes glow{
+  from{text-shadow:0 0 10px #fff;}
+  to{text-shadow:0 0 30px #ffea00;}
+}
+
+/* HEART SPLIT */
+.heart{
+  font-size:4rem;
+  animation:heartbeat 1s infinite;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.3)}
+  100%{transform:scale(1)}
+}
+
+/* MAIN CONTENT */
+#main{
+  display:none;
+  padding:20px;
+  text-align:center;
+}
+
+/* SLIDER */
+.slider{
+  width:90%;
+  max-width:400px;
+  height:250px;
+  margin:20px auto;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 30px rgba(255,255,255,0.6);
+}
+.slider img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  animation:slide 6s infinite;
+}
+@keyframes slide{
+  0%{opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{opacity:0}
+}
+
+/* TYPING */
+#letter{
+  font-size:1.1rem;
+  margin:20px;
+  min-height:120px;
+}
+
+/* PROMISE POPUP */
+#promise{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  z-index:1000;
+}
+#promise h2{
+  font-size:2rem;
+  margin-bottom:20px;
+}
+.btn{
+  padding:15px 30px;
+  font-size:1.2rem;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(45deg,#ff416c,#ff4b2b);
+  color:white;
+  cursor:pointer;
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+  100%{transform:scale(1)}
+}
+
+/* FLOATING HEARTS & ROSES */
+.float{
+  position:absolute;
+  bottom:-50px;
+  animation:floatUp linear infinite;
+}
+@keyframes floatUp{
+  to{transform:translateY(-110vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ENTRY -->
+<div id="entry">
+  <div class="heart">❤️</div>
+  <h1 class="big-text">Happy New Year<br>My Ladoo 🐼🐧</h1>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <h2>Manisha ❤️ (My Mani)</h2>
+
+  <div class="slider">
+    <img id="slideImg" src="">
+  </div>
+
+  <div id="letter"></div>
+</div>
+
+<!-- PROMISE -->
+<div id="promise">
+  <h2>💍 A Promise 💍</h2>
+  <p style="margin:20px;text-align:center;">
+    I promise to stay with you<br>
+    In every year, every situation,<br>
+    every up and down.
+  </p>
+  <button class="btn" onclick="closePromise()">I Believe You ❤️</button>
+</div>
+
+<script>
+// PHOTOS (CHANGE THESE)
+const photos=[
+  "D:\\Documents\\Documents\\web page\\transport\\WhatsApp Image 2026-01-01 at 2.57.01 AM.jpeg",
+  "D:\\Documents\\Documents\\web page\\transport\\WhatsApp Image 2025-09-26 at 01.13.24_b348b525.jpg",
+  "D:\\Documents\\Documents\\web page\\transport\\IMG-20250827-WA0033.jpg",
+  "D:\\Documents\\Documents\\web page\\transport\\20250728_074816.heic",
+];
+
+// SLIDER
+let i=0;
+const img=document.getElementById("slideImg");
+img.src=photos[0];
+setInterval(()=>{
+  i=(i+1)%photos.length;
+  img.src=photos[i];
+},4000);
+
+// TYPE LETTER
+const text=`My Mani,
+Our journey started in 2023.
+Five months of misunderstanding,
+ego kept us silent,
+but love never left.
+
+Thank you for coming into my life.
+Sorry for every hurt.
+I promise to hold you,
+every year, every situation.
+
+Forever your Penguine 🐧❤️`;
+let idx=0;
+function type(){
+  if(idx<text.length){
+    document.getElementById("letter").innerHTML+=text.charAt(idx);
+    idx++;
+    setTimeout(type,50);
+  }
+}
+setTimeout(type,2500);
+
+// ENTRY TO MAIN
+setTimeout(()=>{
+  document.getElementById("entry").style.display="none";
+  document.getElementById("main").style.display="block";
+},3000);
+
+// PROMISE POPUP
+setTimeout(()=>{
+  document.getElementById("promise").style.display="flex";
+},12000);
+function closePromise(){
+  document.getElementById("promise").style.display="none";
+}
+
+// FLOATING ELEMENTS
+function spawn(symbol){
+  const el=document.createElement("div");
+  el.className="float";
+  el.innerHTML=symbol;
+  el.style.left=Math.random()*100+"vw";
+  el.style.fontSize=(20+Math.random()*30)+"px";
+  el.style.animationDuration=(5+Math.random()*5)+"s";
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),10000);
+}
+setInterval(()=>spawn("❤️"),300);
+setInterval(()=>spawn("🌹"),600);
+setInterval(()=>spawn("🎆"),800);
+setInterval(()=>spawn("🐼"),2000);
+</script>
+
+</body>
+</html>
